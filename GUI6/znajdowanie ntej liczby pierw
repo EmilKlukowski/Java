@@ -1,0 +1,69 @@
+package GUI6;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        int liczbaUzytkownika = sc.nextInt();
+
+        try{
+            obliczPierwsza(100);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public static boolean isPrime(int liczba) {
+        if (liczba <= 1) {
+            return false;
+        }
+
+        int iloscDzielnikow = 0;
+        for (int i = 1; i <= liczba; i++) {
+
+            if (liczba % i == 0) {
+                iloscDzielnikow++;
+            }
+
+        }
+
+        if (iloscDzielnikow == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public static void obliczPierwsza(int k) throws Exception {
+        double start = System.currentTimeMillis();
+        //nr liczby //liczba
+        Map<Integer, Integer> liczby = new HashMap<>();
+
+        if (k <= 0) {
+            throw new Exception("Brak liczby pierwszej");
+        }
+
+        int liczba = 0;
+        int nrLiczby = 1;
+
+        for (int i = 0; nrLiczby <= k; i++) {
+
+            if (isPrime(liczba)) {
+                liczby.put(nrLiczby, liczba);
+                nrLiczby++;
+            }
+
+            liczba++;
+        }
+        double end = System.currentTimeMillis();
+        double wynik = (end - start)/1000;
+        System.out.println(liczby.get(k));
+        System.out.println("Time: " + wynik + "s.");
+    }
+}
